@@ -1,5 +1,11 @@
 import * as z from "zod";
 
+/**
+ * Runtime configuration only: compilation does not connect to PostgreSQL or
+ * require a database URL. Supply DATABASE_URL when starting the API.
+ * Build from the repository root with `pnpm build` so the @app/db workspace
+ * dependency produces its dist output. Building apps/api alone omits that output.
+ */
 const EnvSchema = z.object({
   DATABASE_URL: z.url({ protocol: /^postgres(ql)?$/ }),
   PORT: z.coerce.number().int().min(1).max(65535).default(3000),

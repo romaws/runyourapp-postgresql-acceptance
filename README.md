@@ -62,6 +62,18 @@ pnpm dev                              # API on :3000, web on http://localhost:51
 
 Production-style run: `pnpm build`, then `pnpm --filter @app/api start` and serve `apps/web/dist` from any static host behind the same origin as the API.
 
+### Workspace build and runtime configuration
+
+Use the repository root (`.`) as the API build directory and run `pnpm build`.
+The root build orders workspace dependencies, including `@app/db`, before the API.
+Running only the build script in `apps/api` compiles the API but leaves
+`packages/db/dist/index.js` missing, so the API cannot start.
+
+The API runtime directory is `apps/api`; its start command is `pnpm start` there.
+`DATABASE_URL` is a required secret runtime input, not a build-time input. A build
+does not connect to PostgreSQL. Supply a verified PostgreSQL connection before
+runtime verification or deployment; never bake its value into the image.
+
 ## Test
 
 ```sh
