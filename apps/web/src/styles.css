@@ -37,6 +37,7 @@ body {
   margin: 0 auto;
   padding: 32px 16px;
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 16px;
 }
 
@@ -46,6 +47,7 @@ body {
   border-radius: 8px;
   padding: 20px;
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 12px;
 }
 
@@ -56,10 +58,13 @@ h1 {
 
 label {
   display: grid;
+  min-width: 0;
   gap: 4px;
 }
 
 input:not([type="checkbox"]) {
+  min-width: 0;
+  width: 100%;
   padding: 8px 10px;
   border: 1px solid var(--border);
   border-radius: 6px;
@@ -69,6 +74,7 @@ input:not([type="checkbox"]) {
 }
 
 button {
+  flex-shrink: 0;
   padding: 8px 14px;
   border: 1px solid var(--accent);
   border-radius: 6px;
@@ -97,12 +103,15 @@ button:disabled {
 
 .row {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   align-items: center;
 }
 
 .grow {
   flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .tasks {
@@ -127,6 +136,15 @@ button:disabled {
   gap: 8px;
 }
 
+.tasks li label span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.tasks input[type="checkbox"] {
+  flex-shrink: 0;
+}
+
 .tasks li.done label {
   color: var(--muted);
   text-decoration: line-through;
@@ -139,6 +157,7 @@ button:disabled {
 .error {
   color: var(--danger);
   margin: 0;
+  overflow-wrap: anywhere;
 }
 
 .visually-hidden {

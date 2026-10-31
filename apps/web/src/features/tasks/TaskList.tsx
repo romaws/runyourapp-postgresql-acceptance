@@ -89,7 +89,7 @@ export function TaskList() {
             <li key={task.id} className={task.done ? "done" : undefined}>
               <label className="grow">
                 <input type="checkbox" checked={task.done} onChange={() => void toggle(task)} />
-                {task.title}
+                <span>{task.title}</span>
               </label>
               <button type="button" className="link" aria-label={`Delete "${task.title}"`} onClick={() => void remove(task)}>
                 Delete
